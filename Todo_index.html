@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- reset.css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+    <!--css-->
+    <link rel="stylesheet" href="./Todo_main.css">
+
+    <!---->
+</head>
+
+<body>
+    <div class="wrapper">
+        <section class="main">
+            <h1 class="main-title">일정 관리</h1>
+        </section>
+        <div class="second-title">
+            <input type="text" placeholder="할 일을 입력하세요" id="todo" onfocus="this.placeholder = ''"
+                onblur="this.placeholder = '할 일을 입력하세요'" onkeyup='enterkey();'>
+            <div class="btn">⊕</div>
+        </div>
+        <ul id="main-list">
+    </div>
+    </div>
+    <script>
+        let c = 0;
+        let c2=0;
+        createTodo();
+        createTodo();
+        createTodo();
+        //할일 입력 (키보드)
+        const $btn = document.querySelector('.btn');
+        const $focus = document.getElementById('todo');
+
+        function enterkey() {
+            if (window.event.keyCode == 13) {
+                console.log($focus);
+
+                createTodo();
+                document.getElementById('todo').value = null;
+                $focus.blur();
+            }
+        }
+
+        //할일 입력 (마우스)    
+        $btn.addEventListener('click', () => {
+            createTodo();
+            document.getElementById('todo').value = null;
+
+        });
+
+
+
+        //할일 리스트 생성기
+        function createTodo() {
+            c++;
+            const $todo = document.getElementById('todo').value;
+            const $mainList = document.getElementById('main-list');
+            const $newlist = document.createElement('li');
+            const $newspan = document.createElement('span');
+            const $newcheck = document.createElement('input');
+            $newcheck.setAttribute('type', 'checkbox');
+            const $newbtn1 = document.createElement('button');
+            $newbtn1.setAttribute('id', 'btn1');
+            $newbtn1.textContent = '';
+            const $newbtn2 = document.createElement('button');
+            $newbtn2.setAttribute('id', 'btn2');
+            $newlist.appendChild($newcheck);
+            $newlist.appendChild($newspan);
+            if (c < 4) {
+                $newspan.textContent = '할 일' + c;
+            } else $newspan.textContent = $todo;
+            $newlist.appendChild($newbtn1);
+            $newlist.appendChild($newbtn2);
+            $mainList.appendChild($newlist);
+            const $img1 = document.createElement('img');
+            $newbtn1.appendChild($img1);
+            $img1.setAttribute('src', './img/modi.png');
+            const $img2 = document.createElement('img');
+            $newbtn2.appendChild($img2);
+            $img2.setAttribute('src', './img/del.png');
+            document.getElementById('todo').textContent = '';
+
+            //체크박스 언더라인
+            $newcheck.addEventListener('change', () => {
+                $newspan.classList.toggle('underline');
+            });
+
+            //삭제기능
+            $newbtn2.addEventListener('click', e => {
+                $newlist.classList.add('delMoving');
+                setTimeout(function () {
+                    $newlist.remove();
+                }, 1300);
+
+
+            });
+
+            //수정기능시작
+            $newbtn1.addEventListener('click', e => {
+                c2++;
+                $newbtn1.classList.add('hidden');
+                const $newbtn3 = document.createElement('button');
+                $newbtn3.setAttribute('id', 'btn3');
+                $newlist.appendChild($newbtn3);
+                const $img3 = document.createElement('img');
+                $newbtn3.appendChild($img3);
+                $img3.setAttribute('src', './img/check.png');
+                if (c <4) {
+                    $newspan.innerHTML ='<input type="text" id="minput" style="width:50%; font-size:20px; margin-left : 60px;" value="할 일' +
+                    c2 + '" >';
+                }
+                else{$newspan.innerHTML =
+                    '<input type="text" id="minput" style="width:50%; font-size:20px; margin-left : 60px;" value="' +
+                    $todo + '" >';}
+
+                //키보드로 수정완료
+                $newspan.onkeyup = function (e) {
+                    const $newtext = document.getElementById('minput').value;
+
+                    if (e.key === 'Enter') {
+
+                        $newbtn3.classList.add('hidden');
+                        $newbtn1.classList.remove('hidden');
+                        $newbtn3.remove();
+                        $newspan.innerHTML = '';
+                        $newspan.textContent = $newtext;
+
+
+                    } else if (e.key === 'Escape') {
+
+                        $newbtn3.classList.add('hidden');
+                        $newbtn1.classList.remove('hidden');
+                        $newbtn3.remove();
+                        $newspan.innerHTML = '';
+                        $newspan.textContent = $todo;
+                    }
+                }
+
+                //마우스로 수정완료
+                $newbtn3.onclick = function (e) {
+                    const $newtext = document.getElementById('minput').value;
+                    $newcheck.classList.remove('hidden');
+                    $newbtn3.classList.add('hidden');
+                    $newbtn1.classList.remove('hidden');
+                    $newspan.innerHTML = '';
+                    $newspan.textContent = $newtext;
+                    $newbtn3.remove();
+                };
+            });
+
+        }
+    </script>
+</body>
+
+</html>

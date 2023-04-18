@@ -1,0 +1,205 @@
+body {
+    background: #E9EBF0;
+}
+
+.wrapper {
+
+    width: 60%;
+    height: 500px;
+    margin: 150px auto;
+    border: 1px solid black;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px 3px gray;
+    background: white;
+}
+
+.wrapper .main .main-title {
+    width: 100%;
+    height: 100px;
+    color: white;
+    background: #15ABD3;
+    font-size: 30px;
+    text-align: center;
+    line-height: 100px;
+}
+
+#todo {
+    box-sizing: border-box;
+    width: 92%;
+    height: 50px;
+    background: #495059;
+    border: 0px;
+    padding: 10px;
+    line-height: 50px;
+    color: white;
+    font-size: 20px;
+
+}
+
+#todo::placeholder {
+    color: white;
+    font-size: 20px;
+
+}
+
+#todo:focus:-ms-input-placeholder {
+    /* Internet Explorer 10+ */
+    color: transparent;
+}
+
+
+#todo:focus {
+    outline: none;
+    color: white;
+    font-size: 20px;
+}
+
+.wrapper .second-title {
+    display: flex;
+}
+
+.wrapper .second-title .btn {
+    width: 8%;
+    height: 50px;
+    color: white;
+    background: #858E99;
+    font-size: 30px;
+    text-align: center;
+    line-height: 40px;
+}
+
+.wrapper .second-title .btn:hover {
+    cursor: pointer;
+}
+
+#main-list {
+    /* overflow: scroll; */
+    height: 480px;
+    overflow: scroll;
+
+}
+
+#main-list li {
+
+    width: 100%;
+    height: 45px;
+
+    box-sizing: border-box;
+    position: relative;
+}
+
+#main-list li:nth-child(2n) {
+    background: #F8F9FC;
+}
+
+#main-list li input {
+
+    box-sizing: border-box;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+
+}
+
+#main-list li span {
+    display: inline-block;
+    box-sizing: border-box;
+    /* background: red; */
+    width: 80%;
+    height: 40px;
+    padding-left: 50px;
+    line-height: 40px;
+    font-size: 20px;
+    margin-left: 20px;
+
+
+}
+
+#main-list li #btn1 {
+
+    position: absolute;
+    top: 10px;
+    right: 70px;
+}
+
+#main-list li #btn3 {
+
+    position: absolute;
+    top: 10px;
+    right: 70px;
+}
+
+#main-list li #btn2 {
+
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+
+#main-list li .underline {
+
+    text-decoration: line-through;
+    color: #858E99;
+}
+
+#main-list li span #minput {
+    outline: none;
+    border: 1px solid rgb(185, 185, 185);
+    border-radius: 5px;
+    background: inherit;
+}
+
+.hidden {
+    display: none;
+}
+
+button {
+
+    background: inherit;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0;
+
+}
+
+img {
+    width: 30px;
+    height: 30px;
+}
+
+#main-list::-webkit-scrollbar {
+    display: none;
+}
+
+input[type="checkbox"] {
+
+    width: 20px;
+    height: 20px;
+    margin-left: 8px;
+
+
+
+}
+
+.delMoving {
+    animation: delMove 1.5s ease-in-out;
+}
+
+@keyframes delMove {
+    0% {
+        background: orange;
+        transform: translateX(20px);
+    }
+
+    50% {
+        background: orangered;
+        transform: translateX(-500px);
+    }
+
+    100% {
+        background: red;
+        transform: translateX(-2000px);
+    }
+}
